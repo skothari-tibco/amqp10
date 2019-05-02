@@ -1,0 +1,47 @@
+{
+    "name": "flogo-amap",
+    "type": "flogo:trigger",
+    "version": "0.0.1",
+    "title": "AMQP 1.0 Trigger",
+    "description": "AMQP 1.0 Trigger",
+    "settings": [
+      {
+        "name": "amqpURI",
+        "type": "string",
+        "description": "The uri to connecct to AMQP-Trigger",
+        "required":"true"
+      },
+      {
+        "name": "certPem",
+        "type": "string",
+        "description": "The path to certificates"
+      },
+      {
+        "name": "keyPem",
+        "type": "string",
+        "description": "The path to certificates"
+      },
+      {
+        "name": "caPem",
+        "type": "string",
+        "description": "The path to ca certificates"
+      }    
+    ],
+    "handler": {
+      "settings": [
+        {
+          "name": "sourceAddress",
+          "type": "string",
+          "description": "The name of the queue",
+          "required":"true"
+        }
+      ]
+    },
+    "output": [
+      {
+        "name": "data",
+        "type": "object",
+        "description": "The output"
+      }
+    ]
+  }
