@@ -123,7 +123,9 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
         logger.Infof("Sending message:", err)
     }
 
-    sender.Close(bCtx)
+	sender.Close(bCtx)
+	
+	a.client.Close()
 
 	return true, nil
 }
