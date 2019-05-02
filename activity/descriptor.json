@@ -44,12 +44,7 @@
             "type":"string",
             "description" : "The type of content of the message"
 
-        }, 
-        {
-            "name" : "messageID",
-            "type" : "string",
-            "description": "The message id"
-        }, 
+        },
         {
             "name" : "payload",
             "type" : "object",
