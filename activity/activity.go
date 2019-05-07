@@ -87,6 +87,7 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		logger.Infof("Creating AMQP session:", err)
 	}
+	
 	data , err := GetBytes(input.Payload)
 	if err != nil {
 		return true, err
@@ -99,14 +100,15 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		return true, err
 	}
-
-	amqpMessage.Properties.ContentType = input.MessageContentType
-
-	amqpMessage.Properties.MessageID = u
-
-	amqpMessage.Properties.Subject = input.MessageSubject
-
 	
+	properties := &amqp.MessageProperties{
+		ContentType : input.MessageContentType,
+		Subject : input.MessageSubject,
+		MessageID : u,
+	}
+
+	amqpMessage.Properties = properties
+
 	bCtx := context.Background()
 
     sender, err := session.NewSender(

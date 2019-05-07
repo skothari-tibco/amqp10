@@ -40,7 +40,7 @@ func TestEval(t *testing.T) {
 	
 	tc := test.NewActivityContext(act.Metadata())
 
-	input := &Input{LinkTargetAddress:"control/tb02afe3819814694a9e1383ca19eeae6_hub/4711"}
+	input := &Input{LinkTargetAddress:"control/tb02afe3819814694a9e1383ca19eeae6_hub/4711",Payload : "Hello", MessageContentType :"string", MessageSubject: "Hello"}
 	tc.SetInputObject(input)
 
 	act.Eval(tc)
