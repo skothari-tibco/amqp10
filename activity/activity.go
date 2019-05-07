@@ -87,8 +87,12 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	if err != nil {
 		logger.Infof("Creating AMQP session:", err)
 	}
-
-	var amqpMessage *amqp.Message
+	data , err := GetBytes(input.Payload)
+	if err != nil {
+		return true, err
+	}
+	
+	amqpMessage := amqp.NewMessage(data)
 
 	u, err := uuid.NewV4()
 
@@ -96,17 +100,13 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 		return true, err
 	}
 
-	amqpMessage.Properties.MessageID = u
-
 	amqpMessage.Properties.ContentType = input.MessageContentType
 
-	amqpMessage.Properties. Subject = input.MessageSubject
+	amqpMessage.Properties.MessageID = u
 
-	data , err := GetBytes(input.Payload)
-	if err != nil {
-		return true, err
-	}
-	amqpMessage.Data = [][]byte{data}
+	amqpMessage.Properties.Subject = input.MessageSubject
+
+	
 	bCtx := context.Background()
 
     sender, err := session.NewSender(
