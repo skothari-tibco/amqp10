@@ -124,7 +124,8 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
 	logger.Debug("Sending Message ...", amqpMessage)
     err = sender.Send(bCtx, amqpMessage)
     if err != nil {
-        logger.Infof("Sending message:", err)
+		logger.Debug("Error in sending message:", err)
+		return true, nil
     }
 
 	sender.Close(bCtx)
