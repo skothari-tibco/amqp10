@@ -115,8 +115,10 @@ func (a *Activity) Eval(ctx activity.Context) (done bool, err error) {
         amqp.LinkTargetAddress(input.LinkTargetAddress),
     )
     if err != nil {
-        logger.Infof("Creating sender link:", err)
-    }
+		return true, err
+       
+	}
+	logger.Debug("Creating sender link:", sender)
 
 	// Send message
 	logger.Debug("Sending Message ...", amqpMessage)
