@@ -1,5 +1,6 @@
 package amqp
 
+
 type Settings struct {
 	AmqpURI string `md:"amqpURI"`
 	CaPem   string `md:"caPem'`
@@ -22,8 +23,8 @@ func (o *Output) ToMap() map[string]interface{} {
 }
 
 func (o *Output) FromMap(values map[string]interface{}) error {
-
+	
 	o.Data = values["data"]
-
+	
 	return nil
 }

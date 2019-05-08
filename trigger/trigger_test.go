@@ -15,7 +15,7 @@ const testConfig string = `{
 	"id": "flogo-amqp",
 	"ref": "github.com/skothari-tibco/amqp10trigger",
 	"settings": {
-	  "amqpURI": "amqps://messaging@tcef56e88b16548f9a4a49cd5b92150af:QIktjmIzfJHfsvOlT5OF@messaging.bosch-iot-hub.com"
+	  "amqpURI": "amqps://messaging@t90ab69dfe0e54fb9bb38c9083ebb2936_hub:FIX51VQah7NhJZYlDXEx@messaging.bosch-iot-hub.com"
 	},
 	"handlers": [
 	  {
@@ -23,7 +23,7 @@ const testConfig string = `{
 				"id":"dummy"
 			},
 			"settings": {
-				"sourceAddress":"event/tcef56e88b16548f9a4a49cd5b92150af"
+				"sourceAddress":"telemetry/t90ab69dfe0e54fb9bb38c9083ebb2936_hub"
 			}
 	  }
 	]
@@ -53,6 +53,8 @@ func TestAMQPTrigger_Initialize(t *testing.T) {
 	assert.NotNil(t, trg)
 
 	err = trg.Start()
-	assert.Nil(t, err)
+	for {
+
+	}
 
 }

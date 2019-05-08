@@ -102,7 +102,10 @@ func (t *AMQPTrigger) Initialize(ctx trigger.InitContext) error {
 			amqp.LinkSourceAddress(s.SourceAddress),
 			amqp.LinkCredit(10),
 		)
-
+		if err != nil {
+			return err
+		}
+		t.logger.Info("Handler ..",handler)
 		t.receiverHandler = append(t.receiverHandler, RecieverHandler{receiver: receiver, handler: handler})
 	}
 
@@ -110,8 +113,9 @@ func (t *AMQPTrigger) Initialize(ctx trigger.InitContext) error {
 }
 
 func (t *AMQPTrigger) Start() error {
-
+	
 	for _, handler := range t.receiverHandler {
+		t.logger.Infof("Starting Handler")
 		handler.Start()
 	}
 
@@ -130,17 +134,22 @@ func (recieverHandler *RecieverHandler) Start() error {
 	ctx := context.Background()
 
 	for {
+		
 		msg, err := recieverHandler.receiver.Receive(ctx)
 		if err != nil {
 			return fmt.Errorf("Reading message from AMQP: %v", err)
 		}
-
+		
 		// Accept message
 		msg.Accept()
-		out := Output{}
+		out := &Output{}
 		out.Data = msg.GetData()
 
-		_, err = recieverHandler.handler.Handle(ctx, out)
+		_, err = recieverHandler.handler.Handle(context.Background(), out)
+		if err != nil {
+			fmt.Println("Error in Handler..", err)
+		}
+
 	}
 }
 
