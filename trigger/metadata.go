@@ -6,6 +6,8 @@ type Settings struct {
 	CaPem   string `md:"caPem'`
 	CertPem string `md:"certPem"`
 	KeyPem  string `md:"keyPem"`
+	Username string `md:"username"`
+	Password string `md:"password"`
 }
 
 type HandlerSettings struct {

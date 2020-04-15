@@ -71,6 +71,14 @@ func (f *Factory) New(config *trigger.Config) (trigger.Trigger, error) {
 		if err != nil {
 			return nil, fmt.Errorf("Dialing AMQP server: %v", err)
 		}
+	} else if s.Password != "" || s.Username != "" {
+
+		client, err = amqp.Dial(s.AmqpURI, amqp.ConnSASLPlain(s.Username, s.Password))
+
+		if err != nil {
+			return nil, fmt.Errorf("Dialing AMQP server: %v", err)
+		}
+
 	} else {
 
 		client, err = amqp.Dial(s.AmqpURI)

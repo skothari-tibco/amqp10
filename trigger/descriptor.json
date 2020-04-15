@@ -25,7 +25,17 @@
         "name": "caPem",
         "type": "string",
         "description": "The path to ca certificates"
-      }    
+      },
+      {
+        "name": "username",
+        "type": "string",
+        "description": "The username of Amqp queue"
+      },
+      {
+        "name": "password",
+        "type": "string",
+        "description": "The password of Amqp queue."
+      }
     ],
     "handler": {
       "settings": [
