@@ -2,7 +2,7 @@
     "name": "flogo-amap",
     "type": "flogo:trigger",
     "version": "0.0.1",
-    "title": "AMQP 1.0 Trigger",
+    "title": "AMQP Version 1 Trigger",
     "description": "AMQP 1.0 Trigger",
     "settings": [
       {
